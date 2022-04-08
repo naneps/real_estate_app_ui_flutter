@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:real_estate_app_ui_flutter/main.dart';
 import 'package:real_estate_app_ui_flutter/models/property.dart';
+import 'package:real_estate_app_ui_flutter/views/detail.dart';
+import 'package:real_estate_app_ui_flutter/views/filter.dart';
 
 class Search extends StatefulWidget {
   const Search({Key? key}) : super(key: key);
@@ -176,11 +178,11 @@ class _SearchState extends State<Search> {
   }
 
   _showButtomSheet() {
-    showBottomSheet(
+    showModalBottomSheet(
         context: context,
         builder: (BuildContext context) {
           return Wrap(
-            children: [],
+            children: [Filter()],
           );
         });
   }
@@ -200,7 +202,9 @@ class _SearchState extends State<Search> {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => MyApp(),
+              builder: (context) => Detail(
+                property: property,
+              ),
             ));
       },
       child: Card(
@@ -317,9 +321,28 @@ class _SearchState extends State<Search> {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: Colors.yellow[700],
+                          size: 14,
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          property.review + " Reviews",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
-                )
+                ),
               ],
             ),
           ),
